@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Müller",
+    "vorname": "Hans",
+    "verein": "Schützenverein Zürich",
+    "jahrgang": "1985",
+    "schussListe": [9, 10, 8, 10, 9, 10, 8, 9, 10, 7]
+  },
+  {
+    "name": "Schmidt",
+    "vorname": "Anna",
+    "verein": "Sportschützen Bern",
+    "jahrgang": "1990",
+    "schussListe": [10, 10, 9, 9, 10, 8, 10, 10, 9, 10]
+  },
+  {
+    "name": "Weber",
+    "vorname": "Thomas",
+    "verein": "Schützengesellschaft Basel",
+    "jahrgang": "1978",
+    "schussListe": [8, 9, 9, 10, 8, 9, 10, 9, 8, 10]
+  },
+  {
+    "name": "Keller",
+    "vorname": "Maria",
+    "verein": "Schützenverein Luzern",
+    "jahrgang": "1995",
+    "schussListe": [10, 9, 10, 10, 8, 9, 9, 10, 10, 9]
+  },
+  {
+    "name": "Huber",
+    "vorname": "Peter",
+    "verein": "Sportschützen St. Gallen",
+    "jahrgang": "1982",
+    "schussListe": [9, 8, 10, 9, 9, 10, 8, 9, 10, 10]
+  }
+]

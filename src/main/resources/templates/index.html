@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body>
+    <div th:replace="~{layout :: main-layout(~{::section})}">
+        <section>
+            <div th:replace="~{form :: content}"></div>
+        </section>
+    </div>
+</body>
+</html>

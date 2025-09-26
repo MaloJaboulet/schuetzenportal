@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultate</title>
+</head>
+<body>
+    <div th:fragment="content">
+        <div class="table-container">
+            <h2><i class="fas fa-trophy"></i> Qualifikation Resultate</h2>
+
+            <div class="alert alert-info alert-dismissible fade show" th:if="${#lists.isEmpty(qualifikationen)}">
+                <i class="fas fa-info-circle"></i> Keine Daten vorhanden.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <div th:if="${not #lists.isEmpty(qualifikationen)}">
+                <!-- Search and filter controls -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-search"></i></span>
+                            <input type="text" id="searchInput" class="form-control" placeholder="Suchen...">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex justify-content-end">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-filter"></i> Kategorie
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item filter-btn" data-filter="all" href="#">Alle</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item filter-btn" data-filter="P50" href="#">50m Pistole</a></li>
+                                    <li><a class="dropdown-item filter-btn" data-filter="P25" href="#">25m Pistole</a></li>
+                                    <li><a class="dropdown-item filter-btn" data-filter="G300A" href="#">300m Gewehr A</a></li>
+                                    <li><a class="dropdown-item filter-btn" data-filter="G300B" href="#">300m Gewehr B</a></li>
+                                </ul>
+                            </div>
+                            <div class="btn-group ms-2">
+                                <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-sort"></i> Sortieren
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item sort-btn" data-sort="name" href="#">Name</a></li>
+                                    <li><a class="dropdown-item sort-btn" data-sort="score" href="#">Punktzahl (Höchste zuerst)</a></li>
+                                    <li><a class="dropdown-item sort-btn" data-sort="verein" href="#">Verein</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover" id="resultsTable">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Vorname</th>
+                                <th>Jahrgang</th>
+                                <th>Verein</th>
+                                <th>Kategorie</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="qual : ${qualifikationen}" th:data-category="${qual.kategorie}">
+                                <td th:text="${qual.name}"></td>
+                                <td th:text="${qual.vorname}"></td>
+                                <td th:text="${qual.jahrgang}"></td>
+                                <td>
+                                    <span th:text="${qual.vereinName}" th:title="${qual.verein}"></span>
+                                </td>
+                                <td>
+                                    <span class="badge bg-secondary" th:text="${qual.kategorie}"></span>
+                                </td>
+                                <td>
+                                    <span class="total-score" th:text="${qual.totalScore}"></span>
+                                    <div class="progress mt-1" style="height: 5px;" th:switch="${qual.kategorie}">
+                                        <div class="progress-bar" role="progressbar" 
+                                             th:style="'width: ' + (${qual.totalScore} * 100 / 300) + '%'"
+                                             th:class="(${qual.totalScore >= 270} ? 'bg-success' : (${qual.totalScore >= 220} ? 'bg-warning' : 'bg-danger'))"
+                                             th:aria-valuenow="${qual.totalScore}"
+                                             th:case="P50"
+                                             aria-valuemin="0" aria-valuemax="300">
+                                        </div>
+                                        <div class="progress-bar" role="progressbar"
+                                             th:style="'width: ' + (${qual.totalScore} * 100 / 300) + '%'"
+                                             th:class="(${qual.totalScore >= 270} ? 'bg-success' : (${qual.totalScore >= 220} ? 'bg-warning' : 'bg-danger'))"
+                                             th:aria-valuenow="${qual.totalScore}"
+                                             th:case="P25"
+                                             aria-valuemin="0" aria-valuemax="300">
+                                        </div>
+                                        <div class="progress-bar" role="progressbar"
+                                             th:style="'width: ' + (${qual.totalScore} * 100 / 310) + '%'"
+                                             th:class="(${qual.totalScore >= 290} ? 'bg-success' : (${qual.totalScore >= 250} ? 'bg-warning' : 'bg-danger'))"
+                                             th:aria-valuenow="${qual.totalScore}"
+                                             th:case="G300A"
+                                             aria-valuemin="0" aria-valuemax="310">
+                                        </div>
+                                        <div class="progress-bar" role="progressbar"
+                                             th:style="'width: ' + (${qual.totalScore} * 100 / 260) + '%'"
+                                             th:class="(${qual.totalScore >= 240} ? 'bg-success' : (${qual.totalScore >= 220} ? 'bg-warning' : 'bg-danger'))"
+                                             th:aria-valuenow="${qual.totalScore}"
+                                             th:case="G300B"
+                                             aria-valuemin="0" aria-valuemax="260">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination - only show if more than 15 entries -->
+                <nav aria-label="Page navigation" class="mt-4" th:if="${#lists.size(qualifikationen) > 15}">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Zurück</a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Weiter</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Table functionality script -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Search functionality
+                const searchInput = document.getElementById('searchInput');
+                searchInput.addEventListener('keyup', function() {
+                    const searchValue = this.value.toLowerCase();
+                    const rows = document.querySelectorAll('#resultsTable tbody tr');
+
+                    rows.forEach(row => {
+                        const text = row.textContent.toLowerCase();
+                        if (text.includes(searchValue)) {
+                            row.style.display = '';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    });
+                });
+
+                // Category filter
+                const filterButtons = document.querySelectorAll('.filter-btn');
+                filterButtons.forEach(button => {
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const filter = this.getAttribute('data-filter');
+                        const rows = document.querySelectorAll('#resultsTable tbody tr');
+
+                        rows.forEach(row => {
+                            if (filter === 'all' || row.getAttribute('data-category') === filter) {
+                                row.style.display = '';
+                            } else {
+                                row.style.display = 'none';
+                            }
+                        });
+                    });
+                });
+
+                // Sorting
+                const sortButtons = document.querySelectorAll('.sort-btn');
+                sortButtons.forEach(button => {
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const sortBy = this.getAttribute('data-sort');
+                        const table = document.getElementById('resultsTable');
+                        const tbody = table.querySelector('tbody');
+                        const rows = Array.from(tbody.querySelectorAll('tr'));
+
+                        rows.sort((a, b) => {
+                            let aValue, bValue;
+
+                            if (sortBy === 'name') {
+                                aValue = a.cells[0].textContent.toLowerCase();
+                                bValue = b.cells[0].textContent.toLowerCase();
+                                return aValue.localeCompare(bValue);
+                            } else if (sortBy === 'score') {
+                                aValue = parseInt(a.cells[6].textContent);
+                                bValue = parseInt(b.cells[6].textContent);
+                                return bValue - aValue; // Descending order
+                            } else if (sortBy === 'verein') {
+                                aValue = a.cells[3].textContent.toLowerCase();
+                                bValue = b.cells[3].textContent.toLowerCase();
+                                return aValue.localeCompare(bValue);
+                            }
+                        });
+
+                        // Remove existing rows
+                        rows.forEach(row => {
+                            tbody.removeChild(row);
+                        });
+
+                        // Append sorted rows
+                        rows.forEach(row => {
+                            tbody.appendChild(row);
+                        });
+                    });
+                });
+            });
+        </script>
+    </div>
+</body>
+</html>
