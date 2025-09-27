@@ -29,7 +29,8 @@ public class RegistrationsService {
                 competitorDTO.getVorname() + SEMI_COLON +
                 competitorDTO.getName() + SEMI_COLON +
                 competitorDTO.getJahrgang() + SEMI_COLON +
-                competitorDTO.isGuest();
+                competitorDTO.isGuest() + SEMI_COLON +
+                competitorDTO.isEssen();
 
 
         boolean result = fileService.writeToCSV(registrationData, CSV_PATH);

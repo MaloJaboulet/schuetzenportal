@@ -6,6 +6,7 @@ public class CompetitorDTO {
     private String name;
     private String jahrgang;
     private boolean guest;
+    private boolean essen;
 
     /**
      * Default constructor.
@@ -13,12 +14,13 @@ public class CompetitorDTO {
     public CompetitorDTO() {
     }
 
-    public CompetitorDTO(String jahrgang, boolean guest, Integer lizenzNummer, String name, String vorname) {
+    public CompetitorDTO(String jahrgang, boolean guest, Integer lizenzNummer, String name, String vorname, boolean essen) {
         this.jahrgang = jahrgang;
         this.guest = guest;
         this.lizenzNummer = lizenzNummer;
         this.name = name;
         this.vorname = vorname;
+        this.essen = essen;
     }
 
     public String getJahrgang() {
@@ -31,6 +33,10 @@ public class CompetitorDTO {
 
     public boolean isGuest() {
         return guest;
+    }
+
+    public boolean isEssen() {
+        return essen;
     }
 
     public void setGuest(boolean guest) {
@@ -59,5 +65,9 @@ public class CompetitorDTO {
 
     public void setVorname(String vorname) {
         this.vorname = vorname;
+    }
+
+    public void setEssen(boolean essen) {
+        this.essen = essen;
     }
 }
