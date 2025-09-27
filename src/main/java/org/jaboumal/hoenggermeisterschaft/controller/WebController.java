@@ -1,7 +1,7 @@
 package org.jaboumal.hoenggermeisterschaft.controller;
 
-import org.jaboumal.hoenggermeisterschaft.model.Kategorie;
-import org.jaboumal.hoenggermeisterschaft.model.Verein;
+import org.jaboumal.hoenggermeisterschaft.model.enums.Kategorie;
+import org.jaboumal.hoenggermeisterschaft.model.enums.Verein;
 import org.jaboumal.hoenggermeisterschaft.model.dto.QualificationListDTO;
 import org.jaboumal.hoenggermeisterschaft.model.dto.QualifikationAddDTO;
 import org.jaboumal.hoenggermeisterschaft.service.QualificationsService;
@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -21,6 +22,7 @@ import java.util.List;
  * Provides endpoints for displaying the data entry form and results page.
  */
 @Controller
+@RequestMapping("/hoengger/")
 public class WebController {
 
     private static final Logger logger = LoggerFactory.getLogger(WebController.class);
@@ -51,9 +53,9 @@ public class WebController {
         model.addAttribute("kategorieOptions", Kategorie.values());
 
         // Add current page for navigation highlighting
-        model.addAttribute("currentPage", "/");
+        model.addAttribute("currentPage", "/hoengger/");
 
-        return "index";
+        return "hoengger/hoenggermeisterschaft";
     }
 
     /**
@@ -83,9 +85,9 @@ public class WebController {
         redirectAttributes.addFlashAttribute("kategorieOptions", Kategorie.values());
 
         // Add current page for navigation highlighting
-        redirectAttributes.addFlashAttribute("currentPage", "/");
+        redirectAttributes.addFlashAttribute("currentPage", "/hoengger/");
 
-        return "redirect:/";
+        return "redirect:/hoengger/";
     }
 
     /**
@@ -100,8 +102,8 @@ public class WebController {
         model.addAttribute("qualifikationen", qualifikationen);
 
         // Add current page for navigation highlighting
-        model.addAttribute("currentPage", "/results");
+        model.addAttribute("currentPage", "/hoengger/results");
 
-        return "results-page";
+        return "hoengger/results-page";
     }
 }

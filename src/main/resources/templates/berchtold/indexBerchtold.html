@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{berchtold/layoutBerchtold :: head}"></head>
+<body>
+    <div th:replace="~{berchtold/layoutBerchtold :: main-layout(~{::section})}">
+        <section>
+            <div th:replace="~{berchtold/formBerchtold :: content}"></div>
+        </section>
+    </div>
+</body>
+</html>

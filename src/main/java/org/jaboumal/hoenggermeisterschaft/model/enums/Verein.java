@@ -1,4 +1,4 @@
-package org.jaboumal.hoenggermeisterschaft.model;
+package org.jaboumal.hoenggermeisterschaft.model.enums;
 
 public enum Verein {
     SSGN("SSGN", "Standschützengesellschaft Neumünster"),

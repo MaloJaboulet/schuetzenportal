@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{hoengger/layout :: head}"></head>
+<body>
+    <div th:replace="~{hoengger/layout :: main-layout(~{::section})}">
+        <section>
+            <div th:replace="~{hoengger/form :: content}"></div>
+        </section>
+    </div>
+</body>
+</html>

@@ -12,8 +12,6 @@ import org.slf4j.LoggerFactory;
 public class FileService {
 
     private static final Logger logger = LoggerFactory.getLogger(FileService.class);
-    /** Path to the CSV file where qualification data is stored */
-    private static final String CSV_FILE_PATH = "src/main/resources/qualifikation.csv";
 
     /**
      * Writes data to the CSV file.
@@ -22,12 +20,12 @@ public class FileService {
      * @param data the data to be written to the CSV file
      * @return true if the data was written successfully, false otherwise
      */
-    public boolean writeToCSV(String data) {
-        Path path = Path.of(CSV_FILE_PATH);
+    public boolean writeToCSV(String data, String pathStr) {
+        Path path = Path.of(pathStr);
         if (!Files.exists(path)) {
             try {
                 Files.createFile(path);
-                logger.info("CSV file created at {}", CSV_FILE_PATH);
+                logger.info("CSV file created at {}", pathStr);
             } catch (Exception e) {
                 logger.error("Failed to create CSV file", e);
             }
@@ -47,10 +45,10 @@ public class FileService {
      * 
      * @return the content of the CSV file as a string, or an empty string if the file does not exist or an error occurs
      */
-    public String readFromCSV() {
-        Path path = Path.of(CSV_FILE_PATH);
+    public String readFromCSV(String pathStr) {
+        Path path = Path.of(pathStr);
         if (!Files.exists(path)) {
-            logger.warn("CSV file does not exist at {}", CSV_FILE_PATH);
+            logger.warn("CSV file does not exist at {}", pathStr);
             return "";
         }
         try {

@@ -1,6 +1,6 @@
 package org.jaboumal.hoenggermeisterschaft.service;
 
-import org.jaboumal.hoenggermeisterschaft.model.Verein;
+import org.jaboumal.hoenggermeisterschaft.model.enums.Verein;
 import org.jaboumal.hoenggermeisterschaft.model.dto.QualificationListDTO;
 import org.jaboumal.hoenggermeisterschaft.model.dto.QualifikationAddDTO;
 import org.slf4j.Logger;
@@ -16,10 +16,9 @@ import java.util.List;
 public class QualificationsService {
 
     private static final Logger logger = LoggerFactory.getLogger(QualificationsService.class);
-    /** Delimiter used in the CSV file */
     private static final String SEMI_COLON = ";";
-    /** Service for file operations */
     private final FileService fileService;
+    private static final String CSV_PATH = "HoenggerMeisterschaftQuali.csv";
 
     /**
      * Constructs a new QualificationsService with a new FileService instance.
@@ -49,7 +48,7 @@ public class QualificationsService {
 
         String data = stringBuilder.toString();
 
-        boolean result = fileService.writeToCSV(data);
+        boolean result = fileService.writeToCSV(data, CSV_PATH);
         if (result) {
             logger.info("Qualification saved to CSV successfully");
         } else {
@@ -65,7 +64,7 @@ public class QualificationsService {
      */
     public List<QualificationListDTO> getAllQualifications() {
         logger.info("Fetching all qualifications from CSV");
-        String csvData = fileService.readFromCSV();
+        String csvData = fileService.readFromCSV(CSV_PATH);
         List<QualificationListDTO> qualificationListDTO = new ArrayList<>();
         if (csvData.isEmpty()) {
             logger.warn("CSV data is empty");

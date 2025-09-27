@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body>
+<!--<div th:replace="~{layout :: main-layout(~{::section})}">-->
+<div>
+    <section>
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-8">
+                <div class="text-center mb-5">
+                    <h1><i class="fas fa-bullseye"></i> Schützen Portal</h1>
+                    <p class="lead">Wählen Sie Ihren Wettkampf aus:</p>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fas fa-trophy fa-3x text-danger mb-3"></i>
+                                <h3 class="card-title">Höngger Meisterschaft</h3>
+                                <p class="card-text">Qualifikation Daten eingeben mit verschiedenen Kategorien und Vereinen.</p>
+                                <a href="/hoengger/" class="btn btn-primary">
+                                    <i class="fas fa-arrow-right"></i> Zur Höngger Meisterschaft
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fas fa-star fa-3x text-success mb-3"></i>
+                                <h3 class="card-title">Berchtoldschiessen</h3>
+                                <p class="card-text">Schützen Daten eingeben mit Lizenznummern und Gast-Option.</p>
+                                <a href="/berchtold/" class="btn btn-success">
+                                    <i class="fas fa-arrow-right"></i> Zum Berchtoldschiessen
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

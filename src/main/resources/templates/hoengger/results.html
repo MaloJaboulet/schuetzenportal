@@ -185,8 +185,8 @@
                                 bValue = b.cells[0].textContent.toLowerCase();
                                 return aValue.localeCompare(bValue);
                             } else if (sortBy === 'score') {
-                                aValue = parseInt(a.cells[6].textContent);
-                                bValue = parseInt(b.cells[6].textContent);
+                                aValue = parseInt(a.cells[5].textContent);
+                                bValue = parseInt(b.cells[5].textContent);
                                 return bValue - aValue; // Descending order
                             } else if (sortBy === 'verein') {
                                 aValue = a.cells[3].textContent.toLowerCase();

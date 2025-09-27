@@ -1,7 +1,7 @@
 package org.jaboumal.hoenggermeisterschaft.model.dto;
 
-import org.jaboumal.hoenggermeisterschaft.model.Kategorie;
-import org.jaboumal.hoenggermeisterschaft.model.Verein;
+import org.jaboumal.hoenggermeisterschaft.model.enums.Kategorie;
+import org.jaboumal.hoenggermeisterschaft.model.enums.Verein;
 
 import java.util.List;
 
