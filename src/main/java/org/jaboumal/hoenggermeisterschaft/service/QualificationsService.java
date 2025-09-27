@@ -3,6 +3,7 @@ package org.jaboumal.hoenggermeisterschaft.service;
 import org.jaboumal.hoenggermeisterschaft.model.enums.Verein;
 import org.jaboumal.hoenggermeisterschaft.model.dto.QualificationListDTO;
 import org.jaboumal.hoenggermeisterschaft.model.dto.QualifikationAddDTO;
+import org.jaboumal.hoenggermeisterschaft.util.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,6 +38,7 @@ public class QualificationsService {
         logger.info("Saving qualification: {}", qualifikationAddDTO);
 
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(DateUtil.now()).append(SEMI_COLON);
         stringBuilder.append(qualifikationAddDTO.getName()).append(SEMI_COLON);
         stringBuilder.append(qualifikationAddDTO.getVorname()).append(SEMI_COLON);
         stringBuilder.append(qualifikationAddDTO.getJahrgang()).append(SEMI_COLON);
@@ -76,15 +78,15 @@ public class QualificationsService {
         for (String line : lines) {
             String[] parts = line.split(SEMI_COLON);
             QualificationListDTO dto = new QualificationListDTO();
-            dto.setName(parts[0]);
-            dto.setVorname(parts[1]);
-            dto.setJahrgang(Integer.parseInt(parts[2]));
-            dto.setVerein(Verein.fromKuerzel(parts[3]).name());
-            dto.setVereinName(Verein.fromKuerzel(parts[3]).getFullName());
-            dto.setKategorie(parts[4]);
+            dto.setName(parts[1]);
+            dto.setVorname(parts[2]);
+            dto.setJahrgang(Integer.parseInt(parts[3]));
+            dto.setVerein(Verein.fromKuerzel(parts[4]).name());
+            dto.setVereinName(Verein.fromKuerzel(parts[4]).getFullName());
+            dto.setKategorie(parts[5]);
             List<Integer> schussListe = new ArrayList<>();
             int totalScore = 0;
-            for (int i = 5; i < parts.length; i++) {
+            for (int i = 6; i < parts.length; i++) {
                 totalScore += Integer.parseInt(parts[i]);
                 schussListe.add(Integer.parseInt(parts[i]));
             }

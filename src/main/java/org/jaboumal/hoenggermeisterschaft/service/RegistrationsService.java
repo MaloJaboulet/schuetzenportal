@@ -2,12 +2,10 @@ package org.jaboumal.hoenggermeisterschaft.service;
 
 
 import org.jaboumal.hoenggermeisterschaft.model.dto.CompetitorDTO;
+import org.jaboumal.hoenggermeisterschaft.util.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Service
 public class RegistrationsService {
@@ -24,7 +22,7 @@ public class RegistrationsService {
     public boolean saveRegistration(CompetitorDTO competitorDTO) {
 
         int lizenzNummer = competitorDTO.getLizenzNummer() == null ? 9999999 : competitorDTO.getLizenzNummer();
-        String registrationData = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) + SEMI_COLON+
+        String registrationData = DateUtil.now() + SEMI_COLON+
                 lizenzNummer + SEMI_COLON +
                 competitorDTO.getVorname() + SEMI_COLON +
                 competitorDTO.getName() + SEMI_COLON +
