@@ -1,10 +1,10 @@
-package org.jaboumal.hoenggermeisterschaft.controller;
+package org.jaboumal.schuetzenportal.controller;
 
-import org.jaboumal.hoenggermeisterschaft.model.enums.Kategorie;
-import org.jaboumal.hoenggermeisterschaft.model.enums.Verein;
-import org.jaboumal.hoenggermeisterschaft.model.dto.QualificationListDTO;
-import org.jaboumal.hoenggermeisterschaft.model.dto.QualifikationAddDTO;
-import org.jaboumal.hoenggermeisterschaft.service.QualificationsService;
+import org.jaboumal.schuetzenportal.model.enums.Kategorie;
+import org.jaboumal.schuetzenportal.model.enums.Verein;
+import org.jaboumal.schuetzenportal.model.dto.QualificationListDTO;
+import org.jaboumal.schuetzenportal.model.dto.QualifikationAddDTO;
+import org.jaboumal.schuetzenportal.service.QualificationsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;

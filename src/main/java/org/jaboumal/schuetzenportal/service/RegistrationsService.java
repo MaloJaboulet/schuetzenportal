@@ -1,8 +1,8 @@
-package org.jaboumal.hoenggermeisterschaft.service;
+package org.jaboumal.schuetzenportal.service;
 
 
-import org.jaboumal.hoenggermeisterschaft.model.dto.CompetitorDTO;
-import org.jaboumal.hoenggermeisterschaft.util.DateUtil;
+import org.jaboumal.schuetzenportal.model.dto.CompetitorDTO;
+import org.jaboumal.schuetzenportal.util.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

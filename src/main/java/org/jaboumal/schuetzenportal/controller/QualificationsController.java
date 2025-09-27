@@ -1,9 +1,9 @@
-package org.jaboumal.hoenggermeisterschaft.controller;
+package org.jaboumal.schuetzenportal.controller;
 
 
-import org.jaboumal.hoenggermeisterschaft.model.dto.QualificationListDTO;
-import org.jaboumal.hoenggermeisterschaft.model.dto.QualifikationAddDTO;
-import org.jaboumal.hoenggermeisterschaft.service.QualificationsService;
+import org.jaboumal.schuetzenportal.model.dto.QualificationListDTO;
+import org.jaboumal.schuetzenportal.model.dto.QualifikationAddDTO;
+import org.jaboumal.schuetzenportal.service.QualificationsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

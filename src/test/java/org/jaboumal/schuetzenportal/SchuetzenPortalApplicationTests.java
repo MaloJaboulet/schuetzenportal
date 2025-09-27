@@ -1,10 +1,10 @@
-package org.jaboumal.hoenggermeisterschaft;
+package org.jaboumal.schuetzenportal;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class HoenggerMeisterschaftApplicationTests {
+class SchuetzenPortalApplicationTests {
 
     @Test
     void contextLoads() {

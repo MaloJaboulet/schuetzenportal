@@ -1,7 +1,7 @@
-package org.jaboumal.hoenggermeisterschaft.controller;
+package org.jaboumal.schuetzenportal.controller;
 
-import org.jaboumal.hoenggermeisterschaft.model.dto.CompetitorDTO;
-import org.jaboumal.hoenggermeisterschaft.service.RegistrationsService;
+import org.jaboumal.schuetzenportal.model.dto.CompetitorDTO;
+import org.jaboumal.schuetzenportal.service.RegistrationsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

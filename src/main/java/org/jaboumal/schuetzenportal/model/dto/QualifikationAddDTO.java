@@ -1,33 +1,33 @@
-package org.jaboumal.hoenggermeisterschaft.model.dto;
+package org.jaboumal.schuetzenportal.model.dto;
+
+import org.jaboumal.schuetzenportal.model.enums.Kategorie;
+import org.jaboumal.schuetzenportal.model.enums.Verein;
 
 import java.util.List;
 
 /**
- * Data Transfer Object for qualification data used in list views.
- * Contains all information about a qualification record for display purposes.
+ * Data Transfer Object for qualification data used when adding a new qualification.
+ * Contains all information needed to create a new qualification record.
  */
-public class QualificationListDTO {
+public class QualifikationAddDTO {
+
     /** Last name of the participant */
     private String name;
     /** First name of the participant */
     private String vorname;
-    /** Club code of the participant */
-    private String verein;
-    /** Full name of the club */
-    private String vereinName;
+    /** Club of the participant */
+    private Verein verein;
     /** Year of birth of the participant */
     private int jahrgang;
     /** Category of the competition */
-    private String kategorie;
+    private Kategorie kategorie;
     /** List of scores for each shot */
     private List<Integer> schussListe;
-    /** Total score (sum of all shots) */
-    private int totalScore;
 
     /**
      * Default constructor.
      */
-    public QualificationListDTO() {
+    public QualifikationAddDTO() {
     }
 
     /**
@@ -37,19 +37,15 @@ public class QualificationListDTO {
      * @param kategorie category of the competition
      * @param name last name of the participant
      * @param schussListe list of scores for each shot
-     * @param totalScore total score (sum of all shots)
-     * @param verein club code of the participant
-     * @param vereinName full name of the club
+     * @param verein club of the participant
      * @param vorname first name of the participant
      */
-    public QualificationListDTO(int jahrgang, String kategorie, String name, List<Integer> schussListe, int totalScore, String verein, String vereinName, String vorname) {
+    public QualifikationAddDTO(int jahrgang, Kategorie kategorie, String name, List<Integer> schussListe, Verein verein, String vorname) {
         this.jahrgang = jahrgang;
         this.kategorie = kategorie;
         this.name = name;
         this.schussListe = schussListe;
-        this.totalScore = totalScore;
         this.verein = verein;
-        this.vereinName = vereinName;
         this.vorname = vorname;
     }
 
@@ -76,7 +72,7 @@ public class QualificationListDTO {
      * 
      * @return the category
      */
-    public String getKategorie() {
+    public Kategorie getKategorie() {
         return kategorie;
     }
 
@@ -85,7 +81,7 @@ public class QualificationListDTO {
      * 
      * @param kategorie the category to set
      */
-    public void setKategorie(String kategorie) {
+    public void setKategorie(Kategorie kategorie) {
         this.kategorie = kategorie;
     }
 
@@ -126,57 +122,21 @@ public class QualificationListDTO {
     }
 
     /**
-     * Gets the total score (sum of all shots).
+     * Gets the club of the participant.
      * 
-     * @return the total score
+     * @return the club
      */
-    public int getTotalScore() {
-        return totalScore;
-    }
-
-    /**
-     * Sets the total score (sum of all shots).
-     * 
-     * @param totalScore the total score to set
-     */
-    public void setTotalScore(int totalScore) {
-        this.totalScore = totalScore;
-    }
-
-    /**
-     * Gets the club code of the participant.
-     * 
-     * @return the club code
-     */
-    public String getVerein() {
+    public Verein getVerein() {
         return verein;
     }
 
     /**
-     * Sets the club code of the participant.
+     * Sets the club of the participant.
      * 
-     * @param verein the club code to set
+     * @param verein the club to set
      */
-    public void setVerein(String verein) {
+    public void setVerein(Verein verein) {
         this.verein = verein;
-    }
-
-    /**
-     * Gets the full name of the club.
-     * 
-     * @return the full name of the club
-     */
-    public String getVereinName() {
-        return vereinName;
-    }
-
-    /**
-     * Sets the full name of the club.
-     * 
-     * @param vereinName the full name of the club to set
-     */
-    public void setVereinName(String vereinName) {
-        this.vereinName = vereinName;
     }
 
     /**

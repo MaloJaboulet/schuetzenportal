@@ -1,4 +1,4 @@
-package org.jaboumal.hoenggermeisterschaft.util;
+package org.jaboumal.schuetzenportal.util;
 
 import java.time.format.DateTimeFormatter;
 

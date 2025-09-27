@@ -1,9 +1,9 @@
-package org.jaboumal.hoenggermeisterschaft.service;
+package org.jaboumal.schuetzenportal.service;
 
-import org.jaboumal.hoenggermeisterschaft.model.enums.Verein;
-import org.jaboumal.hoenggermeisterschaft.model.dto.QualificationListDTO;
-import org.jaboumal.hoenggermeisterschaft.model.dto.QualifikationAddDTO;
-import org.jaboumal.hoenggermeisterschaft.util.DateUtil;
+import org.jaboumal.schuetzenportal.model.enums.Verein;
+import org.jaboumal.schuetzenportal.model.dto.QualificationListDTO;
+import org.jaboumal.schuetzenportal.model.dto.QualifikationAddDTO;
+import org.jaboumal.schuetzenportal.util.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

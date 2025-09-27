@@ -1,4 +1,4 @@
-package org.jaboumal.hoenggermeisterschaft.model.dto;
+package org.jaboumal.schuetzenportal.model.dto;
 
 public class CompetitorDTO {
     private Integer lizenzNummer;

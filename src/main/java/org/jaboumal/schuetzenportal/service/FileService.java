@@ -1,4 +1,4 @@
-package org.jaboumal.hoenggermeisterschaft.service;
+package org.jaboumal.schuetzenportal.service;
 
 import java.nio.file.Files;
 import java.nio.file.Path;

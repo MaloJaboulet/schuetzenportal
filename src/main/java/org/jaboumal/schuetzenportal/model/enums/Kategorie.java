@@ -1,4 +1,4 @@
-package org.jaboumal.hoenggermeisterschaft.model.enums;
+package org.jaboumal.schuetzenportal.model.enums;
 
 /**
  * Enum representing different competition categories
