@@ -1,26 +1,42 @@
 package org.jaboumal.schuetzenportal.model.dto;
 
+import java.util.List;
+
 public class CompetitorDTO {
-    private Integer lizenzNummer;
     private String vorname;
     private String name;
     private String jahrgang;
     private boolean guest;
-    private boolean essen;
+    private Integer lizenzNummer;
 
-    /**
-     * Default constructor.
-     */
+    // New: store selected labels as strings
+    private List<String> berchtoldSelections;
+
     public CompetitorDTO() {
     }
 
-    public CompetitorDTO(String jahrgang, boolean guest, Integer lizenzNummer, String name, String vorname, boolean essen) {
+    public CompetitorDTO(String jahrgang, boolean guest, Integer lizenzNummer, String name, String vorname) {
         this.jahrgang = jahrgang;
         this.guest = guest;
         this.lizenzNummer = lizenzNummer;
         this.name = name;
         this.vorname = vorname;
-        this.essen = essen;
+    }
+
+    public String getVorname() {
+        return vorname;
+    }
+
+    public void setVorname(String vorname) {
+        this.vorname = vorname;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getJahrgang() {
@@ -35,10 +51,6 @@ public class CompetitorDTO {
         return guest;
     }
 
-    public boolean isEssen() {
-        return essen;
-    }
-
     public void setGuest(boolean guest) {
         this.guest = guest;
     }
@@ -51,23 +63,23 @@ public class CompetitorDTO {
         this.lizenzNummer = lizenzNummer;
     }
 
-    public String getName() {
-        return name;
+    public List<String> getBerchtoldSelections() {
+        return berchtoldSelections;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setBerchtoldSelections(List<String> berchtoldSelections) {
+        this.berchtoldSelections = berchtoldSelections;
     }
 
-    public String getVorname() {
-        return vorname;
-    }
-
-    public void setVorname(String vorname) {
-        this.vorname = vorname;
-    }
-
-    public void setEssen(boolean essen) {
-        this.essen = essen;
+    @Override
+    public String toString() {
+        return "CompetitorDTO{" +
+                "vorname='" + vorname + '\'' +
+                ", name='" + name + '\'' +
+                ", jahrgang='" + jahrgang + '\'' +
+                ", guest=" + guest +
+                ", lizenzNummer=" + lizenzNummer +
+                ", berchtoldChoices=" + berchtoldSelections +
+                '}';
     }
 }

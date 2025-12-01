@@ -22,15 +22,21 @@ public class FileService {
      */
     public boolean writeToCSV(String data, String pathStr) {
         Path path = Path.of(pathStr);
+        boolean newlyCreated = false;
         if (!Files.exists(path)) {
             try {
                 Files.createFile(path);
+                newlyCreated = true;
                 logger.info("CSV file created at {}", pathStr);
             } catch (Exception e) {
                 logger.error("Failed to create CSV file", e);
             }
         }
         try {
+            if (newlyCreated || Files.size(path) == 0) {
+                String header = "Date;Lizenznummer;Vorname;Name;Jahrgang;Guest;Essen;BerchtoldSelections" + System.lineSeparator();
+                Files.writeString(path, header, java.nio.file.StandardOpenOption.APPEND);
+            }
             Files.writeString(path, data + System.lineSeparator(), java.nio.file.StandardOpenOption.APPEND);
             logger.info("Data written to CSV: {}", data);
         } catch (Exception e) {

@@ -22,21 +22,37 @@ public class RegistrationsService {
     public boolean saveRegistration(CompetitorDTO competitorDTO) {
 
         int lizenzNummer = competitorDTO.getLizenzNummer() == null ? 9999999 : competitorDTO.getLizenzNummer();
-        String registrationData = DateUtil.now() + SEMI_COLON+
-                lizenzNummer + SEMI_COLON +
-                competitorDTO.getVorname() + SEMI_COLON +
-                competitorDTO.getName() + SEMI_COLON +
-                competitorDTO.getJahrgang() + SEMI_COLON +
-                competitorDTO.isGuest() + SEMI_COLON +
-                competitorDTO.isEssen();
 
-
-        boolean result = fileService.writeToCSV(registrationData, CSV_PATH);
-        if (result) {
-            logger.info("Registration saved to CSV successfully");
+        String berchtoldField;
+        if (competitorDTO.getBerchtoldSelections() != null && !competitorDTO.getBerchtoldSelections().isEmpty()) {
+            berchtoldField = String.join("|", competitorDTO.getBerchtoldSelections());
         } else {
-            logger.error("Failed to save registration to CSV");
+            berchtoldField = "No Selection";
         }
-        return result;
+
+        StringBuilder row = new StringBuilder();
+        row.append(DateUtil.now()).append(SEMI_COLON);
+        row.append(lizenzNummer).append(SEMI_COLON);
+        row.append(escapeCsv(competitorDTO.getVorname())).append(SEMI_COLON);
+        row.append(escapeCsv(competitorDTO.getName())).append(SEMI_COLON);
+        row.append(escapeCsv(competitorDTO.getJahrgang())).append(SEMI_COLON);
+        row.append(competitorDTO.isGuest()).append(SEMI_COLON);
+        row.append(escapeCsv(berchtoldField));
+
+        String data = row.toString();
+
+        boolean ok = fileService.writeToCSV(data, CSV_PATH);
+        if (!ok) {
+            logger.error("Failed to write registration to CSV");
+            return false;
+        }
+
+        logger.info("Saved registration: {}", data);
+        return true;
+    }
+
+    private String escapeCsv(String value) {
+        if (value == null) return "";
+        return value.replace("\n", " ").replace("\r", " ").replace(";", ",");
     }
 }

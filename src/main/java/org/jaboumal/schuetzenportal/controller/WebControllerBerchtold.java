@@ -27,7 +27,7 @@ public class WebControllerBerchtold {
     @GetMapping("/")
     public String showForm(Model model) {
         logger.info("GET /registrations/ - Showing form");
-        if (!model.containsAttribute("competitor")) {
+        if (!model.containsAttribute("competitorDTO")) {
             model.addAttribute("competitorDTO", new CompetitorDTO());
         }
 
@@ -40,19 +40,15 @@ public class WebControllerBerchtold {
     @PostMapping("/save")
     public String saveRegistration(@ModelAttribute CompetitorDTO competitorDTO, RedirectAttributes redirectAttributes) {
         logger.info("POST /registrations/save - Saving registration: {}", competitorDTO);
-        boolean isDataSaved = registrationsService.saveRegistration(competitorDTO);
+        redirectAttributes.addFlashAttribute("currentPage", "/berchtold/");
 
-        if (isDataSaved) {
-            logger.info("Registration saved successfully");
+        boolean saved = registrationsService.saveRegistration(competitorDTO);
+        if (saved) {
             redirectAttributes.addFlashAttribute("success", true);
         } else {
-            logger.error("Failed to save registration");
             redirectAttributes.addFlashAttribute("error", true);
+            redirectAttributes.addFlashAttribute("competitorDTO", competitorDTO);
         }
-
-        redirectAttributes.addFlashAttribute("competitorDTO", new CompetitorDTO());
-        // Add current page for navigation highlighting
-        redirectAttributes.addFlashAttribute("currentPage", "/berchtold/");
 
         return "redirect:/berchtold/";
     }

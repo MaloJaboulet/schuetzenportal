@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="de">
 <head>
     <meta charset="UTF-8">
     <title>Daten Eingabe</title>
@@ -58,15 +58,30 @@
                         <label for="gast" class="form-check-label mb-0"><i class="fas fa-users"></i> Gast (Ja/Nein)?</label>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-check d-flex align-items-center">
-                        <input class="form-check-input me-2" id="essen" th:field="*{essen}" type="checkbox">
-                        <label for="essen" class="form-check-label mb-0"><i class="fa fa-cutlery"></i> Essen (Ja/Nein)?</label>
-                    </div>
-                </div>
             </div>
 
-
+            <div class="row mb-3">
+                <div class="col-12">
+                    <label class="form-label d-block"><i class="fas fa-calendar-check"></i> Ich nehme am Berchtoldschiessen 2026 teil (bitte ankreuzen):</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="berchtold_g300" th:field="*{berchtoldSelections}" th:value="'Gewehr 300m'">
+                        <label class="form-check-label" for="berchtold_g300"><i class="fas fa-bullseye me-1"></i>Gewehr 300m</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="berchtold_g50" th:field="*{berchtoldSelections}" th:value="'Gewehr 50m'">
+                        <label class="form-check-label" for="berchtold_g50"><i class="fas fa-crosshairs me-1"></i>Gewehr 50m</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="berchtold_p50" th:field="*{berchtoldSelections}" th:value="'Pistole 50m'">
+                        <label class="form-check-label" for="berchtold_p50"><i class="fas fa-hand-rock me-1"></i>Pistole 50m</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="berchtold_feier" th:field="*{berchtoldSelections}" th:value="'Berchtoldsfeier inkl. Nachtessen'">
+                        <label class="form-check-label" for="berchtold_feier"><i class="fas fa-glass-cheers me-1"></i>an der Berchtoldsfeier inkl. Nachtessen</label>
+                    </div>
+                    <div id="berchtoldError" class="invalid-feedback" th:attr="style=${berchtoldError} ? 'display:block' : 'display:none'">Bitte wählen Sie mindestens eine Option für das Berchtoldschiessen.</div>
+                </div>
+            </div>
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button type="reset" class="btn btn-secondary me-md-2">
@@ -92,6 +107,32 @@
             Array.prototype.slice.call(forms)
                 .forEach(function (form) {
                     form.addEventListener('submit', function (event) {
+                        // Custom check: at least one Berchtold checkbox must be selected
+                        var berchtoldChecked = false;
+                        var b1 = form.querySelector('#berchtold_g300');
+                        var b2 = form.querySelector('#berchtold_g50');
+                        var b3 = form.querySelector('#berchtold_p50');
+                        var b4 = form.querySelector('#berchtold_feier');
+                        if (b1 && b1.checked) berchtoldChecked = true;
+                        if (b2 && b2.checked) berchtoldChecked = true;
+                        if (b3 && b3.checked) berchtoldChecked = true;
+                        if (b4 && b4.checked) berchtoldChecked = true;
+
+                        var berchtoldError = form.querySelector('#berchtoldError');
+                        if (!berchtoldChecked) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            if (berchtoldError) {
+                                berchtoldError.style.display = 'block';
+                            }
+                            form.classList.add('was-validated');
+                            return;
+                        } else {
+                            if (berchtoldError) {
+                                berchtoldError.style.display = 'none';
+                            }
+                        }
+
                         if (!form.checkValidity()) {
                             event.preventDefault()
                             event.stopPropagation()
@@ -101,119 +142,6 @@
                     }, false)
                 })
         })()
-
-        // Category change event listener - this goes in your existing JavaScript section
-        document.getElementById('kategorie').addEventListener('change', function() {
-            const selectedCategory = this.value;
-            const shotCard = document.getElementById('shotCard');
-            const container = document.getElementById('shotInputContainer');
-
-            if (!selectedCategory) {
-                shotCard.style.display = 'none';
-                return;
-            }
-
-            // Show the card
-            shotCard.style.display = 'block';
-
-            // Clear existing content
-            container.innerHTML = '';
-
-            // Generate form inputs based on category
-            let html = '<div class="row">';
-
-            if (selectedCategory === 'G300A') {
-                html += generateG300AInputs();
-            } else if (selectedCategory === 'G300B') {
-                html += generateG300BInputs();
-            } else if (selectedCategory === 'P25' || selectedCategory === 'P50') {
-                html += generateP2550Inputs();
-            }
-
-            html += '</div>';
-            container.innerHTML = html;
-
-            // Re-apply form validation
-            applyValidationToNewInputs();
-        });
-
-        function generateG300AInputs() {
-            const configs = [
-                { label: 'Passe 1', min: 0, max: 100, placeholder: '0-100' },
-                { label: 'Passe 2', min: 0, max: 100, placeholder: '0-100' },
-                { label: 'Passe 3', min: 0, max: 20, placeholder: '0-20' },
-                { label: 'Passe 4', min: 0, max: 30, placeholder: '0-30' },
-                { label: 'Passe 5', min: 0, max: 60, placeholder: '0-60' }
-            ];
-
-            return generateColumnLayout(configs, 'col-md-4', 2);
-        }
-
-        function generateG300BInputs() {
-            const configs = [
-                { label: 'Passe 1', min: 0, max: 100, placeholder: '0-100' },
-                { label: 'Passe 2', min: 0, max: 50, placeholder: '0-50' },
-                { label: 'Passe 3', min: 0, max: 20, placeholder: '0-20' },
-                { label: 'Passe 4', min: 0, max: 30, placeholder: '0-30' },
-                { label: 'Passe 5', min: 0, max: 60, placeholder: '0-60' }
-            ];
-
-            return generateColumnLayout(configs, 'col-md-4', 2);
-        }
-
-        function generateP2550Inputs() {
-            const configs = Array.from({length: 6}, (_, i) => ({
-                label: `Passe ${i + 1}`,
-                min: 0,
-                max: 50,
-                placeholder: '0-50'
-            }));
-
-            return generateColumnLayout(configs, 'col-md-6', 3);
-        }
-
-        function generateColumnLayout(configs, colClass, itemsPerColumn) {
-            let html = '';
-            const numColumns = Math.ceil(configs.length / itemsPerColumn);
-
-            for (let col = 0; col < numColumns; col++) {
-                html += `<div class="${colClass}">`;
-
-                for (let i = col * itemsPerColumn; i < Math.min((col + 1) * itemsPerColumn, configs.length); i++) {
-                    const config = configs[i];
-                    html += `
-                <div class="mb-3">
-                    <label for="schuss${i}" class="form-label">${config.label}</label>
-                    <input type="number" class="form-control" id="schuss${i}"
-                           name="schussListe[${i}]" min="${config.min}" max="${config.max}"
-                           required placeholder="${config.placeholder}">
-                    <div class="invalid-feedback">Bitte geben Sie einen Wert zwischen ${config.min} und ${config.max} ein.</div>
-                </div>`;
-                }
-
-                html += '</div>';
-            }
-
-            return html;
-        }
-
-        function applyValidationToNewInputs() {
-            const form = document.getElementById('qualificationForm') || document.querySelector('form');
-            const inputs = form.querySelectorAll('input[type="number"]:not([data-validated])');
-
-            inputs.forEach(input => {
-                input.setAttribute('data-validated', 'true');
-                input.addEventListener('input', function() {
-                    if (this.checkValidity()) {
-                        this.classList.remove('is-invalid');
-                        this.classList.add('is-valid');
-                    } else {
-                        this.classList.remove('is-valid');
-                        this.classList.add('is-invalid');
-                    }
-                });
-            });
-        }
     </script>
 </div>
 </body>
