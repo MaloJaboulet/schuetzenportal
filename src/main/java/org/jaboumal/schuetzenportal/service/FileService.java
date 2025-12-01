@@ -34,7 +34,7 @@ public class FileService {
         }
         try {
             if (newlyCreated || Files.size(path) == 0) {
-                String header = "Date;Lizenznummer;Vorname;Name;Jahrgang;Guest;Essen;BerchtoldSelections" + System.lineSeparator();
+                String header = "Date;Lizenznummer;Vorname;Name;Jahrgang;Guest;BerchtoldSelections" + System.lineSeparator();
                 Files.writeString(path, header, java.nio.file.StandardOpenOption.APPEND);
             }
             Files.writeString(path, data + System.lineSeparator(), java.nio.file.StandardOpenOption.APPEND);
