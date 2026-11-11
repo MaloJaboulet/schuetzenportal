@@ -5,7 +5,7 @@
     <title>Daten Eingabe</title>
 </head>
 <body>
-<div th:fragment="content">
+<div th:fragment="content" th:with="nextYear=${#dates.year(#dates.createNow()) + 1}">
     <div class="form-container">
         <h2><i class="fas fa-user-plus"></i> Schützen Daten Eingabe</h2>
 
@@ -40,8 +40,8 @@
                 <div class="col-md-6 mb-3">
                     <label for="jahrgang" class="form-label"><i class="fas fa-calendar-alt"></i> Jahrgang*</label>
                     <input type="number" class="form-control" id="jahrgang" name="jahrgang" required min="1900"
-                           max="2025" placeholder="z.B. 1985">
-                    <div class="invalid-feedback">Bitte geben Sie einen gültigen Jahrgang ein (1900-2025).</div>
+                           th:attr="max=${nextYear}" placeholder="z.B. 1985">
+                    <div class="invalid-feedback">Bitte geben Sie einen gültigen Jahrgang ein (1900-[[${nextYear}]]).</div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="lizenzNummer" class="form-label"><i class="fas fa-calendar-alt"></i> Lizenznummer</label>
@@ -62,7 +62,7 @@
 
             <div class="row mb-3">
                 <div class="col-12">
-                    <label class="form-label d-block"><i class="fas fa-calendar-check"></i> Ich nehme am Berchtoldschiessen 2026 teil (bitte ankreuzen):</label>
+                    <label class="form-label d-block"><i class="fas fa-calendar-check"></i> Ich nehme am Berchtoldschiessen [[${nextYear}]] teil (bitte ankreuzen):</label>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="berchtold_g300" th:field="*{berchtoldSelections}" th:value="'Gewehr 300m'">
                         <label class="form-check-label" for="berchtold_g300"><i class="fas fa-bullseye me-1"></i>Gewehr 300m</label>
