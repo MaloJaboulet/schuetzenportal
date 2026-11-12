@@ -30,6 +30,8 @@ public class RegistrationsService {
             berchtoldField = "No Selection";
         }
 
+        int dinnerGuestCount = competitorDTO.getDinnerGuestCount() != null ? competitorDTO.getDinnerGuestCount() : 0;
+
         StringBuilder row = new StringBuilder();
         row.append(DateUtil.now()).append(SEMI_COLON);
         row.append(lizenzNummer).append(SEMI_COLON);
@@ -37,7 +39,8 @@ public class RegistrationsService {
         row.append(escapeCsv(competitorDTO.getName())).append(SEMI_COLON);
         row.append(escapeCsv(competitorDTO.getJahrgang())).append(SEMI_COLON);
         row.append(competitorDTO.isGuest()).append(SEMI_COLON);
-        row.append(escapeCsv(berchtoldField));
+        row.append(escapeCsv(berchtoldField)).append(SEMI_COLON);
+        row.append(dinnerGuestCount);
 
         String data = row.toString();
 

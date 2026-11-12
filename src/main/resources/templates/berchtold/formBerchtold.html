@@ -79,6 +79,10 @@
                         <input class="form-check-input" type="checkbox" id="berchtold_feier" th:field="*{berchtoldSelections}" th:value="'Berchtoldsfeier inkl. Nachtessen'">
                         <label class="form-check-label" for="berchtold_feier"><i class="fas fa-glass-cheers me-1"></i>an der Berchtoldsfeier inkl. Nachtessen</label>
                     </div>
+                    <div id="dinnerGuestsContainer" class="mt-2" style="display:none;">
+                        <label for="dinnerGuestCount" class="form-label"><i class="fas fa-users"></i> Anzahl Gäste (ohne dich):</label>
+                        <input type="number" class="form-control" id="dinnerGuestCount" th:field="*{dinnerGuestCount}" min="0" max="20" value="0" style="max-width: 200px;">
+                    </div>
                     <div id="berchtoldError" class="invalid-feedback" th:attr="style=${berchtoldError} ? 'display:block' : 'display:none'">Bitte wählen Sie mindestens eine Option für das Berchtoldschiessen.</div>
                 </div>
             </div>
@@ -99,6 +103,22 @@
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function () {
             'use strict'
+
+            // Show/hide dinner guests field when the dinner checkbox is toggled
+            var feierCheckbox = document.getElementById('berchtold_feier');
+            var guestsContainer = document.getElementById('dinnerGuestsContainer');
+            if (feierCheckbox && guestsContainer) {
+                feierCheckbox.addEventListener('change', function () {
+                    if (this.checked) {
+                        guestsContainer.style.display = 'block';
+                    } else {
+                        guestsContainer.style.display = 'none';
+                        // Reset the guest count when dinner is deselected
+                        var guestInput = document.getElementById('dinnerGuestCount');
+                        if (guestInput) guestInput.value = 0;
+                    }
+                });
+            }
 
             // Fetch all the forms we want to apply custom Bootstrap validation styles to
             var forms = document.querySelectorAll('.needs-validation')

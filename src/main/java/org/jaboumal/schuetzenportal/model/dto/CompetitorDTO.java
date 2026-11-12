@@ -12,6 +12,8 @@ public class CompetitorDTO {
     // New: store selected labels as strings
     private List<String> berchtoldSelections;
 
+    private Integer dinnerGuestCount;
+
     public CompetitorDTO() {
     }
 
@@ -71,6 +73,14 @@ public class CompetitorDTO {
         this.berchtoldSelections = berchtoldSelections;
     }
 
+    public Integer getDinnerGuestCount() {
+        return dinnerGuestCount;
+    }
+
+    public void setDinnerGuestCount(Integer dinnerGuestCount) {
+        this.dinnerGuestCount = dinnerGuestCount;
+    }
+
     @Override
     public String toString() {
         return "CompetitorDTO{" +
@@ -80,6 +90,7 @@ public class CompetitorDTO {
                 ", guest=" + guest +
                 ", lizenzNummer=" + lizenzNummer +
                 ", berchtoldChoices=" + berchtoldSelections +
+                ", dinnerGuestCount=" + dinnerGuestCount +
                 '}';
     }
 }
